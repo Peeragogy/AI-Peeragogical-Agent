@@ -32,7 +32,7 @@ export default function ReviewPage() {
                 throw new Error(`AI API Error: ${response.status} - ${responseText}`);
             }
 
-            const data = JSON.parse(responseText); // Ora convertiamo in JSON
+            const data = JSON.parse(responseText);
             setAiSuggestions(data.suggestions);
         } catch (error) {
             console.error("Error fetching AI suggestions:", error.message);
@@ -44,29 +44,36 @@ export default function ReviewPage() {
     const voteDown = () => setVotes(votes - 1);
 
     return (
-        <div className="container mx-auto p-6">
-            <h1 className="text-3xl font-bold mb-4">Reviewing: {file}</h1>
-            <textarea
-                className="w-full h-96 p-4 border rounded-lg"
-                value={content}
-                readOnly
-            />
-            <button
-                onClick={handleAISuggestions}
-                className="mt-4 p-2 bg-green-600 text-white rounded"
-            >
-                🤖 Get AI Suggestions
-            </button>
-            {aiSuggestions && (
-                <div className="mt-6 p-4 bg-gray-100 border rounded-lg">
-                    <h2 className="text-xl font-semibold">AI Suggestions:</h2>
-                    <p>{aiSuggestions}</p>
-                    <div className="mt-4 flex items-center">
-                        <button onClick={voteUp} className="mr-4 p-2 bg-green-500 text-white rounded">👍 {votes}</button>
-                        <button onClick={voteDown} className="p-2 bg-red-500 text-white rounded">👎</button>
+        <div className="container mx-auto p-6 flex space-x-6">
+            {/* Sezione Capitolo */}
+            <div className="w-1/2 p-4 border rounded-lg bg-white shadow-md h-screen overflow-auto">
+                <h1 className="text-3xl font-bold mb-4">Reviewing: {file}</h1>
+                <textarea
+                    className="w-full h-5/6 p-4 border rounded-lg resize-none"
+                    value={content}
+                    readOnly
+                />
+            </div>
+
+            {/* Sezione Suggerimenti AI */}
+            <div className="w-1/2 p-4 border rounded-lg bg-gray-50 shadow-md h-screen overflow-auto">
+                <button
+                    onClick={handleAISuggestions}
+                    className="mb-4 p-2 bg-green-600 text-white rounded w-full"
+                >
+                    🤖 Get AI Suggestions
+                </button>
+                {aiSuggestions && (
+                    <div className="p-4 bg-white border rounded-lg">
+                        <h2 className="text-xl font-semibold mb-2">AI Suggestions:</h2>
+                        <p>{aiSuggestions}</p>
+                        <div className="mt-4 flex items-center">
+                            <button onClick={voteUp} className="mr-4 p-2 bg-green-500 text-white rounded">👍 {votes}</button>
+                            <button onClick={voteDown} className="p-2 bg-red-500 text-white rounded">👎</button>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 }
