@@ -1,0 +1,8 @@
+export default function HistoryPage() {
+    return (
+        <div>
+            <h1>History Page</h1>
+            <p>This page will show the revision history of Markdown files.</p>
+        </div>
+    );
+}
