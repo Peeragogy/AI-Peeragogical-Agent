@@ -11,13 +11,13 @@
     "next": "^15.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-markdown": "^10.1.0",
+    "react-markdown": "^8.0.7",
     "rehype-raw": "^7.0.0",
-    "remark-gfm": "^4.0.1"
+    "remark-gfm": "^3.0.1",
+    "sharp": "^0.32.6"
   },
   "description": "## 📌 Introduction",
   "main": "next.config.js",
-  "devDependencies": {},
   "keywords": [],
   "author": "",
   "license": "ISC"

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import MarkdownViewer from "../../components/MarkdownViewer";
 
 export default function ViewerPage() {
@@ -9,25 +9,22 @@ export default function ViewerPage() {
 
     useEffect(() => {
         if (!filename) return;
-
         const fetchMarkdown = async () => {
             try {
-                const response = await fetch(`/api/getMarkdown?filename=${filename}`);
-                if (!response.ok) throw new Error("Failed to load file");
-                const data = await response.json();
+                const res = await fetch(`/api/getMarkdown?filename=${filename}`);
+                const data = await res.json();
                 setContent(data.content);
-            } catch (error) {
-                console.error("❌ Error loading markdown:", error);
-                setContent("Error loading file.");
+            } catch (err) {
+                console.error("❌ Failed to load markdown:", err);
+                setContent("Errore nel caricamento del file.");
             }
         };
-
         fetchMarkdown();
     }, [filename]);
 
     return (
-        <div>
-            <h1>{filename ? filename.replace(".md", "") : "Loading..."}</h1>
+        <div style={{ padding: "1rem", flex: 1 }}>
+            <h1>{filename?.replace(".md", "")}</h1>
             <MarkdownViewer content={content} />
         </div>
     );

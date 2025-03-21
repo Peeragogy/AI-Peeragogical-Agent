@@ -1,17 +1,13 @@
-import React from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
-import styles from "./MarkdownViewer.module.css"; // Import corretto
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import styles from './MarkdownViewer.module.css'
 
-const MarkdownViewer = ({ content }) => {
+export default function MarkdownViewer({ content }) {
     return (
-        <div className={styles.markdownContainer}>
-            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+        <div className={styles.markdownBody}>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {content}
             </ReactMarkdown>
         </div>
-    );
-};
-
-export default MarkdownViewer;
+    )
+}
