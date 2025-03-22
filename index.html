@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Peer Review Dashboard - Wireframe</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #2e3a59;
+            color: white;
+            padding: 1rem;
+        }
+
+        nav {
+            background-color: #44527a;
+            color: white;
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav ul li {
+            cursor: pointer;
+        }
+
+        .progress-tracker {
+            text-align: right;
+        }
+
+        .progress-tracker span {
+            font-size: 0.9rem;
+            display: block;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 10px;
+            background: #ccc;
+            border-radius: 5px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #4caf50;
+            width: 0%;
+            transition: width 0.3s ease-in-out;
+        }
+
+        main {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 1rem;
+        }
+
+        .sidebar ul li {
+            cursor: pointer;
+            padding: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar ul li.active {
+            background-color: #dce4f2;
+            font-weight: bold;
+        }
+
+        .badge {
+            padding: 0.2rem 0.5rem;
+            font-size: 0.75rem;
+            border-radius: 0.25rem;
+            color: white;
+        }
+
+        .badge.NEW {
+            background-color: #2196f3;
+        }
+
+        .badge.INPROGRESS {
+            background-color: #ff9800;
+        }
+
+        .badge.DONE {
+            background-color: #4caf50;
+        }
+
+        .dashboard {
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 1rem;
+        }
+
+        .card {
+            border: 1px dashed #aaa;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: #f9f9f9;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        footer {
+            background-color: #2e3a59;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>AI Peeragogy Handbook Dashboard</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li>Submit Feedback</li>
+            <li>Review Feedback</li>
+            <li>AI Summaries</li>
+            <li>Insights & Metrics</li>
+            <li>AI Advisor & Resources</li>
+        </ul>
+        <div class="progress-tracker">
+            <span id="progress-tracker">Progress: 0/8 chapters completed</span>
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <aside class="sidebar">
+            <h2>Peeragogy Handbook Chapters</h2>
+            <ul id="chapter-list">
+                <li data-chapter="Motivation" data-status="NEW">1. Motivation <span class="badge NEW">NEW</span></li>
+                <li data-chapter="Convening" data-status="INPROGRESS">2. Convening <span class="badge INPROGRESS">IN
+                        PROGRESS</span></li>
+                <li data-chapter="Organizing" data-status="DONE">3. Organizing <span class="badge DONE">DONE</span></li>
+                <li data-chapter="Co-working" data-status="NEW">4. Co-working <span class="badge NEW">NEW</span></li>
+                <li data-chapter="Assessment" data-status="NEW">5. Assessment <span class="badge NEW">NEW</span></li>
+                <li data-chapter="Roadmap" data-status="INPROGRESS">6. Roadmap <span class="badge INPROGRESS">IN
+                        PROGRESS</span></li>
+                <li data-chapter="Patterns" data-status="DONE">7. Patterns <span class="badge DONE">DONE</span></li>
+                <li data-chapter="Appendix" data-status="NEW">8. Appendix <span class="badge NEW">NEW</span></li>
+            </ul>
+        </aside>
+
+        <section class="dashboard">
+            <div class="card" id="chapter-overview">
+                <h3>Chapter Overview & Related Tools</h3>
+                <p>Click on a chapter to view its content and access peer review tools, AI insights, and recommended
+                    resources.</p>
+            </div>
+            <div class="card">
+                <h3>Feedback Submissions</h3>
+                <p>List of peer review feedback submitted by users.</p>
+                <button onclick="markChapterAsDone()">Mark current chapter as DONE</button>
+            </div>
+            <div class="card">
+                <h3>AI Generated Summary</h3>
+                <p>Summarized feedback with key points, strengths, blind spots.</p>
+            </div>
+            <div class="card">
+                <h3>Human Validation</h3>
+                <p>Editable AI output with reviewer comments and corrections.</p>
+            </div>
+            <div class="card">
+                <h3>Insights Dashboard</h3>
+                <p>Charts and stats showing trends, sentiment, strengths/weaknesses.</p>
+            </div>
+            <div class="card">
+                <h3>AI Advisor & Resources</h3>
+                <p>Personalized suggestions and curated external links based on your feedback analysis.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AI-Peeragogical Agent Project</p>
+    </footer>
+
+    <script>
+        const chapterListItems = document.querySelectorAll('#chapter-list li');
+        const overviewCard = document.getElementById('chapter-overview');
+        const progressTracker = document.getElementById('progress-tracker');
+        let currentChapter = null;
+
+        const chapterDescriptions = {
+            Motivation: 'Explore what drives peer learning and how to align motivation with group goals.',
+            Convening: 'Learn how to bring people together and establish shared intentions.',
+            Organizing: 'Understand tools and methods to structure effective collaboration.',
+            'Co-working': 'Focus on actual peer-to-peer work practices, productivity, and synergy.',
+            Assessment: 'Dive into self-assessment and peer feedback as learning mechanisms.',
+            Roadmap: 'Create evolving paths for group learning processes.',
+            Patterns: 'Explore recurring solutions and behaviors in peer learning.',
+            Appendix: 'Supportive documents, case studies, and additional resources.'
+        };
+
+        function updateProgressTracker() {
+            let doneCount = 0;
+            chapterListItems.forEach(item => {
+                const badge = item.querySelector('.badge');
+                if (badge && badge.textContent === 'DONE') {
+                    doneCount++;
+                }
+            });
+            progressTracker.textContent = `Progress: ${doneCount}/8 chapters completed`;
+            const progressFill = document.getElementById('progress-fill');
+            const percent = (doneCount / 8) * 100;
+            progressFill.style.width = `${percent}%`;
+        }
+
+        function loadChapterStatuses() {
+            chapterListItems.forEach(item => {
+                const chapter = item.getAttribute('data-chapter');
+                const savedStatus = localStorage.getItem(`chapterStatus-${chapter}`);
+                if (savedStatus) {
+                    const badge = item.querySelector('.badge');
+                    badge.textContent = savedStatus;
+                    badge.className = `badge ${savedStatus}`;
+                }
+            });
+            updateProgressTracker();
+        }
+
+        chapterListItems.forEach(item => {
+            item.addEventListener('click', () => {
+                chapterListItems.forEach(li => li.classList.remove('active'));
+                item.classList.add('active');
+                currentChapter = item;
+
+                const chapter = item.getAttribute('data-chapter');
+                overviewCard.innerHTML = `
+          <h3>${chapter}</h3>
+          <p>${chapterDescriptions[chapter]}</p>
+          <p><em>Tools and resources for this chapter will appear here.</em></p>
+        `;
+            });
+        });
+
+        function markChapterAsDone() {
+            if (!currentChapter) return;
+            const chapter = currentChapter.getAttribute('data-chapter');
+            const badge = currentChapter.querySelector('.badge');
+            badge.textContent = 'DONE';
+            badge.className = 'badge DONE';
+            localStorage.setItem(`chapterStatus-${chapter}`, 'DONE');
+            updateProgressTracker();
+        }
+
+        window.onload = () => {
+            loadChapterStatuses();
+        };
+    </script>
+</body>
+
+</html>

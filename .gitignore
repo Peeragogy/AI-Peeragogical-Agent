@@ -1,0 +1,20 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Build/compiled
+dist/
+build/
+*.class
+
+# Node/Python junk (future-proof)
+node_modules/
+__pycache__/
+.env
+
+# System files
+*.swp
+
