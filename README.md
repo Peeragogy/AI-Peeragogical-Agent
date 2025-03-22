@@ -1,10 +1,16 @@
-# 🎓 Welcome to AI Peeragogical Agent! 🚀
-
+# 🎓  AI-Peeragogical-Agent 🚀
 
 > **This is not a finished tool.  
 > It’s a launchpad for co-creating AI-powered peer learning experiences.**  
 >
-> → Propose your project. Fork the agent. Collaborate on the future of education.
+> 
+
+![Version](https://img.shields.io/badge/version-1.0-blue.svg)
+![Status](https://img.shields.io/badge/status-in--progress-yellow)
+![License](https://img.shields.io/github/license/Peeragogy/AI-Peeragogical-Agent)
+![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
+![OpenAI](https://img.shields.io/badge/AI-OpenAI-9cf?logo=openai)
+![React](https://img.shields.io/badge/frontend-React-61DAFB?logo=react&logoColor=white)
 
 ---
 
@@ -15,6 +21,8 @@ It invites educators, developers, designers, and learners to co-create tools, co
 
 This is not just a software repo.  
 It’s a collaborative learning environment, where ideas turn into prototypes, and prototypes into shared knowledge.
+
+→ Propose your project. Fork the agent. Collaborate on the future of education.
 
 ---
 
@@ -103,4 +111,4 @@ Connect with the Peeragogy community through:
 
 > ✨ This is a playground for peer-powered learning — with AI as a collaborator.  
 > Let’s build the future of education, together.
-
+📌 **Version:** 1.0 — Last updated: March 2025
