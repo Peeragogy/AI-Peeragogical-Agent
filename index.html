@@ -150,7 +150,7 @@
             <li>AI Advisor & Resources</li>
         </ul>
         <div class="progress-tracker">
-            <span id="progress-tracker">Progress: 0/8 chapters completed</span>
+            <span id="progress-tracker">Progress: 0 chapters completed</span>
             <div class="progress-bar">
                 <div id="progress-fill" class="progress-fill"></div>
             </div>
@@ -160,18 +160,7 @@
     <main>
         <aside class="sidebar">
             <h2>Peeragogy Handbook Chapters</h2>
-            <ul id="chapter-list">
-                <li data-chapter="Motivation" data-status="NEW">1. Motivation <span class="badge NEW">NEW</span></li>
-                <li data-chapter="Convening" data-status="INPROGRESS">2. Convening <span class="badge INPROGRESS">IN
-                        PROGRESS</span></li>
-                <li data-chapter="Organizing" data-status="DONE">3. Organizing <span class="badge DONE">DONE</span></li>
-                <li data-chapter="Co-working" data-status="NEW">4. Co-working <span class="badge NEW">NEW</span></li>
-                <li data-chapter="Assessment" data-status="NEW">5. Assessment <span class="badge NEW">NEW</span></li>
-                <li data-chapter="Roadmap" data-status="INPROGRESS">6. Roadmap <span class="badge INPROGRESS">IN
-                        PROGRESS</span></li>
-                <li data-chapter="Patterns" data-status="DONE">7. Patterns <span class="badge DONE">DONE</span></li>
-                <li data-chapter="Appendix" data-status="NEW">8. Appendix <span class="badge NEW">NEW</span></li>
-            </ul>
+            <ul id="chapter-list"></ul>
         </aside>
 
         <section class="dashboard">
@@ -209,10 +198,12 @@
     </footer>
 
     <script>
-        const chapterListItems = document.querySelectorAll('#chapter-list li');
-        const overviewCard = document.getElementById('chapter-overview');
-        const progressTracker = document.getElementById('progress-tracker');
-        let currentChapter = null;
+        const chapters = [
+            "Motivation", "Convening", "Organizing", "Co-working", "Assessment",
+            "Roadmap", "Patterns", "Appendix", "Introduction", "Foreword",
+            "Participation", "Roles", "Structure", "Moderation", "Play",
+            "Researching", "Summaries"
+        ];
 
         const chapterDescriptions = {
             Motivation: 'Explore what drives peer learning and how to align motivation with group goals.',
@@ -222,25 +213,48 @@
             Assessment: 'Dive into self-assessment and peer feedback as learning mechanisms.',
             Roadmap: 'Create evolving paths for group learning processes.',
             Patterns: 'Explore recurring solutions and behaviors in peer learning.',
-            Appendix: 'Supportive documents, case studies, and additional resources.'
+            Appendix: 'Supportive documents, case studies, and additional resources.',
+            Introduction: 'Start here: key principles and context of the Peeragogy Handbook.',
+            Foreword: 'An introductory message about the importance and impact of peer learning.',
+            Participation: 'Understand how participation shapes peer learning environments.',
+            Roles: 'Discover the different roles in a peeragogy project and how they interact.',
+            Structure: 'Explore structural models that support peer learning.',
+            Moderation: 'Learn about facilitation and the balance between structure and freedom.',
+            Play: 'Playful approaches to peer learning and their pedagogical power.',
+            Researching: 'Guidance for conducting and applying research in peer projects.',
+            Summaries: 'Highlights and overviews of core ideas throughout the handbook.'
         };
+
+        const chapterList = document.getElementById('chapter-list');
+        const overviewCard = document.getElementById('chapter-overview');
+        const progressTracker = document.getElementById('progress-tracker');
+        let currentChapter = null;
+
+        chapters.forEach((chapter, index) => {
+            const li = document.createElement('li');
+            li.setAttribute('data-chapter', chapter);
+            li.setAttribute('data-status', 'NEW');
+            li.innerHTML = `${index + 1}. ${chapter} <span class="badge NEW">NEW</span>`;
+            chapterList.appendChild(li);
+        });
 
         function updateProgressTracker() {
             let doneCount = 0;
-            chapterListItems.forEach(item => {
-                const badge = item.querySelector('.badge');
+            const badges = document.querySelectorAll('.badge');
+            badges.forEach(badge => {
                 if (badge && badge.textContent === 'DONE') {
                     doneCount++;
                 }
             });
-            progressTracker.textContent = `Progress: ${doneCount}/8 chapters completed`;
+            progressTracker.textContent = `Progress: ${doneCount}/${chapters.length} chapters completed`;
             const progressFill = document.getElementById('progress-fill');
-            const percent = (doneCount / 8) * 100;
+            const percent = (doneCount / chapters.length) * 100;
             progressFill.style.width = `${percent}%`;
         }
 
         function loadChapterStatuses() {
-            chapterListItems.forEach(item => {
+            const items = document.querySelectorAll('#chapter-list li');
+            items.forEach(item => {
                 const chapter = item.getAttribute('data-chapter');
                 const savedStatus = localStorage.getItem(`chapterStatus-${chapter}`);
                 if (savedStatus) {
@@ -252,19 +266,24 @@
             updateProgressTracker();
         }
 
-        chapterListItems.forEach(item => {
-            item.addEventListener('click', () => {
-                chapterListItems.forEach(li => li.classList.remove('active'));
-                item.classList.add('active');
-                currentChapter = item;
+        document.addEventListener('click', function (e) {
+            const target = e.target.closest('#chapter-list li');
+            if (!target) return;
+            document.querySelectorAll('#chapter-list li').forEach(li => li.classList.remove('active'));
+            target.classList.add('active');
+            currentChapter = target;
 
-                const chapter = item.getAttribute('data-chapter');
-                overviewCard.innerHTML = `
-          <h3>${chapter}</h3>
-          <p>${chapterDescriptions[chapter]}</p>
-          <p><em>Tools and resources for this chapter will appear here.</em></p>
-        `;
-            });
+            const chapter = target.getAttribute('data-chapter');
+            const chapterFile = chapter.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '');
+
+            overviewCard.innerHTML = `
+        <h3>${chapter}</h3>
+        <p>${chapterDescriptions[chapter]}</p>
+        <p><em>Tools and resources for this chapter will appear here.</em></p>
+        <a href="chapters/en-html/${chapterFile}.html" target="_blank"
+          style="display:inline-block;margin-top:10px;padding:0.5rem 1rem;background:#2e3a59;color:white;border-radius:4px;text-decoration:none;">
+          📖 Leggi il capitolo completo
+        </a>`;
         });
 
         function markChapterAsDone() {
@@ -277,9 +296,7 @@
             updateProgressTracker();
         }
 
-        window.onload = () => {
-            loadChapterStatuses();
-        };
+        window.onload = loadChapterStatuses;
     </script>
 </body>
 
